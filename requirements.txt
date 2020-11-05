@@ -2,7 +2,6 @@ scipy==1.5.2
 numpy==1.19.2
 tensorboard
 pymilvus==0.2.14
-torch==1.7.0+cu101 torchvision==0.8.1+cu101 torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
 tqdm==4.49.0
 torch_optimizer==0.0.1a14
 matplotlib==3.3.1
