@@ -99,7 +99,7 @@ def render_header():
 
 @st.cache
 def load_mekd():
-    return pickle.load(open(DATAPATH + "dataset.pickle", "rb"))
+    return pickle.load(open(DATAPATH + "myembeddings.pickle", "rb"))
 
 
 def get_embeddings():
@@ -115,7 +115,7 @@ def load_models(device):
 
     ddpg.load_state_dict(torch.load(MODELSPATH + 'ddpg_policy2.model', map_location=device))
 
-    return ddpg
+    {'ddpg': ddpg}
 
 
 def rank(gen_action, metric, k):
