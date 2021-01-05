@@ -277,7 +277,7 @@ def main():
             topk = st.slider(
                 "TOP K items to recommend:", min_value=1, max_value=30, value=7
             )
-            action = models[algorithm].forward(state)
+            action = models["ddpg"].forward(state)
 
             st.subheader("The neural network thinks you should watch:")
             st.write(rank(action[0].detach().cpu().numpy(), dist[metric], topk))
