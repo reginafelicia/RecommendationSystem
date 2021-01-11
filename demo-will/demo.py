@@ -113,9 +113,9 @@ def get_embeddings():
 def load_models(device):
     ddpg = recnn.nn.models.Actor(290, 28, 256).to(device)
 
-    ddpg.load_state_dict(torch.load(MODELSPATH + 'ddpg_policy2.model', map_location=device))
+    ddpg.load_state_dict(torch.load(MODELSPATH + 'ddpg_policy.pt', map_location=device))
 
-    {'ddpg': ddpg}
+    return {'ddpg': ddpg}
 
 
 def rank(gen_action, metric, k):
@@ -237,16 +237,18 @@ def main():
             ids = movies_chosen
             # st.write('Movie indexes', list(ids))s
             embs = load_mekd()
+            st.write("your embs", embs[0].shape)
             state = torch.cat(
                 [
                     torch.cat([embs[i] for i in ids]),
                     torch.tensor(list(ratings)).float(),
                 ]
             )
-            st.write("your state", state)
             state = state.to(device).squeeze(0)
+            st.write("your state", state.shape)
 
             models = load_models(device)
+            st.write("your model", models["ddpg"])
             algorithm = st.selectbox("Choose an algorithm", ("ddpg", "td3"))
 
             metric = st.selectbox(
